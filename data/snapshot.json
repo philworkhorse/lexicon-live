@@ -4,8 +4,8 @@
       "meaning": "water",
       "category": "natural",
       "born": 957,
-      "uses": 22,
-      "fitness": 0.24999999999999856,
+      "uses": 23,
+      "fitness": 0.29999999999999855,
       "history": [
         "lavinpa"
       ]
@@ -14,8 +14,8 @@
       "meaning": "earth",
       "category": "natural",
       "born": 960,
-      "uses": 18,
-      "fitness": 0.10000000000000052,
+      "uses": 19,
+      "fitness": 0.15000000000000052,
       "history": [
         "o"
       ]
@@ -25,7 +25,7 @@
       "category": "quality",
       "born": 968,
       "uses": 16,
-      "fitness": 0.20000000000000062,
+      "fitness": 0.15000000000000063,
       "history": [
         "rimnanom"
       ]
@@ -35,7 +35,7 @@
       "category": "being",
       "born": 962,
       "uses": 18,
-      "fitness": 0.19999999999999912,
+      "fitness": 0.14999999999999913,
       "history": [
         "mesu",
         "meshu"
@@ -45,8 +45,8 @@
       "meaning": "make",
       "category": "action",
       "born": 975,
-      "uses": 10,
-      "fitness": 0.05000000000000018,
+      "uses": 11,
+      "fitness": 0.10000000000000019,
       "history": [
         "hie"
       ]
@@ -56,7 +56,7 @@
       "category": "abstract",
       "born": 979,
       "uses": 11,
-      "fitness": 0.3500000000000005,
+      "fitness": 0.3000000000000005,
       "history": [
         "ehe"
       ]
@@ -65,8 +65,8 @@
       "meaning": "old",
       "category": "quality",
       "born": 981,
-      "uses": 10,
-      "fitness": 0.15000000000000008,
+      "uses": 11,
+      "fitness": 0.10000000000000007,
       "history": [
         "mihu"
       ]
@@ -76,7 +76,7 @@
       "category": "quality",
       "born": 983,
       "uses": 10,
-      "fitness": 0.2500000000000001,
+      "fitness": 0.20000000000000012,
       "history": [
         "enu"
       ]
@@ -85,8 +85,8 @@
       "meaning": "river",
       "category": "natural",
       "born": 984,
-      "uses": 9,
-      "fitness": 0.3000000000000003,
+      "uses": 10,
+      "fitness": 0.25000000000000033,
       "history": [
         "rute"
       ]
@@ -95,8 +95,8 @@
       "meaning": "one",
       "category": "being",
       "born": 987,
-      "uses": 12,
-      "fitness": 0.45,
+      "uses": 13,
+      "fitness": 0.4,
       "history": [
         "namaan"
       ]
@@ -106,7 +106,7 @@
       "category": "relation",
       "born": 989,
       "uses": 8,
-      "fitness": 0.6499999999999992,
+      "fitness": 0.5999999999999992,
       "history": [
         "rin"
       ]
@@ -116,7 +116,7 @@
       "category": "action",
       "born": 992,
       "uses": 4,
-      "fitness": 0.4000000000000002,
+      "fitness": 0.3500000000000002,
       "history": [
         "ponusi"
       ]
@@ -126,7 +126,7 @@
       "category": "quality",
       "born": 997,
       "uses": 1,
-      "fitness": 0.3500000000000001,
+      "fitness": 0.3000000000000001,
       "history": [
         "sona"
       ]
@@ -135,8 +135,8 @@
       "meaning": "beyond",
       "category": "relation",
       "born": 998,
-      "uses": 1,
-      "fitness": 0.10000000000000003,
+      "uses": 2,
+      "fitness": 0.15000000000000002,
       "history": [
         "luomka"
       ]
@@ -145,8 +145,8 @@
       "meaning": "begin",
       "category": "action",
       "born": 999,
-      "uses": 5,
-      "fitness": 0.5499999999999999,
+      "uses": 6,
+      "fitness": 0.49999999999999994,
       "history": [
         "puni"
       ]
@@ -155,8 +155,8 @@
       "meaning": "fall",
       "category": "action",
       "born": 1001,
-      "uses": 4,
-      "fitness": 0.45,
+      "uses": 5,
+      "fitness": 0.5,
       "history": [
         "ra"
       ]
@@ -166,7 +166,7 @@
       "category": "quality",
       "born": 1002,
       "uses": 2,
-      "fitness": 0.6,
+      "fitness": 0.5499999999999999,
       "history": [
         "lio"
       ]
@@ -1926,9 +1926,9 @@
       "born": 1001
     }
   },
-  "generation": 1002,
+  "generation": 1003,
   "created": "2026-02-10T20:11:47.796968",
-  "last_evolved": "2026-02-10T22:45:12.112760",
+  "last_evolved": "2026-02-10T23:11:59.812598",
   "sound_shifts": [
     {
       "gen": 38,
