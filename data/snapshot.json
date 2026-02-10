@@ -1,0 +1,211 @@
+{
+  "words": {
+    "lao": {
+      "meaning": "release",
+      "category": "action",
+      "born": 0,
+      "uses": 4,
+      "fitness": 0.8999999999999999,
+      "history": [
+        "lao"
+      ]
+    },
+    "uo": {
+      "meaning": "order",
+      "category": "abstract",
+      "born": 0,
+      "uses": 4,
+      "fitness": 0.8999999999999996,
+      "history": [
+        "uo"
+      ]
+    },
+    "punnasi": {
+      "meaning": "from",
+      "category": "relation",
+      "born": 0,
+      "uses": 5,
+      "fitness": 0.8999999999999998,
+      "history": [
+        "punnasi"
+      ]
+    },
+    "osu": {
+      "meaning": "threshold",
+      "category": "abstract",
+      "born": 0,
+      "uses": 1,
+      "fitness": 0.5999999999999996,
+      "history": [
+        "osu"
+      ]
+    },
+    "ina": {
+      "meaning": "pattern",
+      "category": "abstract",
+      "born": 0,
+      "uses": 5,
+      "fitness": 0.8999999999999999,
+      "history": [
+        "ina"
+      ]
+    },
+    "ki": {
+      "meaning": "cloud",
+      "category": "natural",
+      "born": 0,
+      "uses": 5,
+      "fitness": 0.7999999999999996,
+      "history": [
+        "ki"
+      ]
+    },
+    "suwen": {
+      "meaning": "deep",
+      "category": "quality",
+      "born": 0,
+      "uses": 5,
+      "fitness": 0.8999999999999996,
+      "history": [
+        "suwen"
+      ]
+    },
+    "hali": {
+      "meaning": "hard",
+      "category": "quality",
+      "born": 0,
+      "uses": 2,
+      "fitness": 0.5999999999999996,
+      "history": [
+        "hali"
+      ]
+    },
+    "nina": {
+      "meaning": "new",
+      "category": "quality",
+      "born": 0,
+      "uses": 5,
+      "fitness": 0.7999999999999996,
+      "history": [
+        "nina"
+      ]
+    },
+    "tapi": {
+      "meaning": "many",
+      "category": "being",
+      "born": 0,
+      "uses": 3,
+      "fitness": 0.7999999999999996,
+      "history": [
+        "tapi"
+      ]
+    },
+    "leso": {
+      "meaning": "one",
+      "category": "being",
+      "born": 1,
+      "uses": 7,
+      "fitness": 0.5499999999999996,
+      "history": [
+        "leso"
+      ]
+    },
+    "tusi": {
+      "meaning": "turn",
+      "category": "action",
+      "born": 2,
+      "uses": 3,
+      "fitness": 0.4999999999999997,
+      "history": [
+        "tusi"
+      ]
+    },
+    "nalanvi": {
+      "meaning": "flow",
+      "category": "action",
+      "born": 4,
+      "uses": 4,
+      "fitness": 0.5999999999999998,
+      "history": [
+        "nalanvi"
+      ]
+    },
+    "honha": {
+      "meaning": "hold",
+      "category": "action",
+      "born": 5,
+      "uses": 4,
+      "fitness": 0.5499999999999998,
+      "history": [
+        "honha"
+      ]
+    },
+    "sakuro": {
+      "meaning": "space",
+      "category": "abstract",
+      "born": 6,
+      "uses": 3,
+      "fitness": 0.5,
+      "history": [
+        "sakuro"
+      ]
+    },
+    "nimeri": {
+      "meaning": "dark",
+      "category": "quality",
+      "born": 7,
+      "uses": 1,
+      "fitness": 0.45,
+      "history": [
+        "nimeri"
+      ]
+    },
+    "kaonvon": {
+      "meaning": "fast",
+      "category": "quality",
+      "born": 8,
+      "uses": 1,
+      "fitness": 0.5,
+      "history": [
+        "kaonvon"
+      ]
+    }
+  },
+  "compounds": {
+    "osna": {
+      "parts": [
+        "osu",
+        "ina"
+      ],
+      "meanings": [
+        "threshold",
+        "pattern"
+      ],
+      "compound_meaning": "threshold-pattern",
+      "born": 4
+    },
+    "kina": {
+      "parts": [
+        "ki",
+        "ina"
+      ],
+      "meanings": [
+        "cloud",
+        "pattern"
+      ],
+      "compound_meaning": "cloud-pattern",
+      "born": 8
+    }
+  },
+  "generation": 8,
+  "created": "2026-02-10T20:11:47.796968",
+  "last_evolved": "2026-02-10T20:41:59.280836",
+  "sound_shifts": [],
+  "extinct": [],
+  "stats": {
+    "total_generated": 17,
+    "total_extinct": 0,
+    "total_compounds": 2,
+    "total_shifts": 0
+  }
+}

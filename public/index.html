@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pi Lexicon — 語彙の進化</title>
+<meta property="og:title" content="Pi Lexicon — A Language That Evolves While Nobody Watches">
+<meta property="og:description" content="An artificial language growing autonomously on a Raspberry Pi. Watch words be born, shift, and go extinct.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&family=Noto+Serif+JP:wght@400;500&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0a0a0c;
+  --surface: #111116;
+  --surface2: #18181f;
+  --border: #252530;
+  --text: #e0e0e8;
+  --text-dim: #7a7a8a;
+  --text-faint: #4a4a5a;
+  --accent: #8b9cf7;
+  --accent-dim: rgba(139,156,247,0.15);
+  --birth: #6ee7b7;
+  --extinct: #f87171;
+  --shift: #fbbf24;
+  --compound: #a78bfa;
+  --natural: #34d399;
+  --abstract: #818cf8;
+  --quality: #fb923c;
+  --action: #38bdf8;
+  --relation: #c084fc;
+  --being: #f472b6;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* --- Hero --- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  overflow: hidden;
+}
+
+.hero canvas {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  opacity: 0.35;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero h1 {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 3.5rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.hero h1 .kanji {
+  display: block;
+  font-size: 1.2rem;
+  color: var(--text-dim);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.3em;
+}
+
+.hero .subtitle {
+  font-size: 1.1rem;
+  color: var(--text-dim);
+  font-weight: 300;
+  max-width: 500px;
+  line-height: 1.6;
+  margin: 1rem auto 2rem;
+}
+
+.hero .gen-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.5rem 1.2rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--accent);
+}
+
+.gen-badge .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--birth);
+  animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.pi-status {
+  margin-top: 1rem;
+  font-size: 0.75rem;
+  color: var(--text-faint);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.pi-status .connected { color: var(--birth); }
+.pi-status .disconnected { color: var(--text-faint); }
+
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  color: var(--text-faint);
+  animation: bob 2s ease infinite;
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(6px); }
+}
+
+/* --- Sections --- */
+.section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.5rem;
+}
+
+.section h2 {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.section p {
+  color: var(--text-dim);
+  line-height: 1.7;
+  font-weight: 300;
+  margin-bottom: 1rem;
+}
+
+/* --- Word Grid --- */
+.word-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 2rem 0;
+}
+
+.word-card {
+  background: var(--surface);
+  padding: 1rem 1.2rem;
+  transition: background 0.3s ease;
+  cursor: default;
+  position: relative;
+}
+
+.word-card:hover {
+  background: var(--surface2);
+}
+
+.word-card .word-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+
+.word-card .word-meaning {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.word-card .word-cat {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-family: 'JetBrains Mono', monospace;
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin-top: 0.4rem;
+  background: var(--accent-dim);
+  color: var(--accent);
+}
+
+.word-card .word-cat[data-cat="natural"] { background: rgba(52,211,153,0.15); color: var(--natural); }
+.word-card .word-cat[data-cat="abstract"] { background: rgba(129,140,248,0.15); color: var(--abstract); }
+.word-card .word-cat[data-cat="quality"] { background: rgba(251,146,60,0.15); color: var(--quality); }
+.word-card .word-cat[data-cat="action"] { background: rgba(56,189,248,0.15); color: var(--action); }
+.word-card .word-cat[data-cat="relation"] { background: rgba(192,132,252,0.15); color: var(--relation); }
+.word-card .word-cat[data-cat="being"] { background: rgba(244,114,182,0.15); color: var(--being); }
+
+.word-card .fitness-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.5s ease;
+}
+
+.word-card .word-meta {
+  font-size: 0.65rem;
+  color: var(--text-faint);
+  font-family: 'JetBrains Mono', monospace;
+  margin-top: 0.3rem;
+}
+
+/* --- Fitness Landscape --- */
+.fitness-chart {
+  position: relative;
+  height: 200px;
+  margin: 2rem 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.fitness-bar-item {
+  position: absolute;
+  bottom: 0;
+  transition: all 0.5s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.fitness-bar-fill {
+  width: 24px;
+  border-radius: 4px 4px 0 0;
+  transition: height 0.5s ease, background 0.5s ease;
+}
+
+.fitness-bar-label {
+  font-size: 0.55rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-faint);
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+  margin-top: 4px;
+  max-height: 60px;
+  overflow: hidden;
+}
+
+/* --- Event Log --- */
+.event-log {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  max-height: 400px;
+  overflow-y: auto;
+  margin: 2rem 0;
+}
+
+.event-log::-webkit-scrollbar { width: 4px; }
+.event-log::-webkit-scrollbar-track { background: var(--surface); }
+.event-log::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+.event-item {
+  padding: 0.4rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  display: flex;
+  gap: 0.75rem;
+  align-items: baseline;
+}
+
+.event-item:last-child { border-bottom: none; }
+
+.event-gen {
+  color: var(--text-faint);
+  min-width: 35px;
+}
+
+.event-type {
+  font-weight: 500;
+  min-width: 65px;
+}
+
+.event-type.birth { color: var(--birth); }
+.event-type.extinct { color: var(--extinct); }
+.event-type.shift { color: var(--shift); }
+.event-type.compound { color: var(--compound); }
+
+.event-detail { color: var(--text-dim); }
+
+/* --- Sentence Generator --- */
+.sentence-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  margin: 2rem 0;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.sentence-box:hover {
+  border-color: var(--accent);
+}
+
+.sentence-text {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.sentence-gloss {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.sentence-hint {
+  font-size: 0.65rem;
+  color: var(--text-faint);
+  margin-top: 1rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* --- Stats Grid --- */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 2rem 0;
+}
+
+.stat-card {
+  background: var(--surface);
+  padding: 1.2rem;
+  text-align: center;
+}
+
+.stat-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  color: var(--text-faint);
+  margin-top: 0.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* --- Extinct Section --- */
+.extinct-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.extinct-word {
+  background: rgba(248,113,113,0.08);
+  border: 1px solid rgba(248,113,113,0.15);
+  border-radius: 4px;
+  padding: 0.3rem 0.6rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--extinct);
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+/* --- Sound Shifts --- */
+.shift-chain {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+}
+
+.shift-from { color: var(--text-faint); text-decoration: line-through; }
+.shift-arrow { color: var(--shift); }
+.shift-to { color: var(--text); }
+.shift-meaning { color: var(--text-dim); font-size: 0.75rem; }
+
+/* --- Compounds --- */
+.compound-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+}
+
+.compound-word { color: var(--compound); font-weight: 500; }
+.compound-eq { color: var(--text-faint); }
+.compound-parts { color: var(--text-dim); }
+.compound-meaning { color: var(--text-dim); font-size: 0.75rem; font-style: italic; }
+
+/* --- Controls --- */
+.controls {
+  display: flex;
+  gap: 0.5rem;
+  margin: 2rem 0;
+  justify-content: center;
+}
+
+.btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.6rem 1.2rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  background: var(--surface2);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn.active {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* --- Footer --- */
+.footer {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-faint);
+  font-size: 0.75rem;
+}
+
+.footer a { color: var(--accent); text-decoration: none; }
+.footer a:hover { text-decoration: underline; }
+
+/* --- Evolve Animation --- */
+.evolve-flash {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 999;
+}
+
+.evolve-flash.active {
+  opacity: 1;
+  animation: flashSlide 1s ease;
+}
+
+@keyframes flashSlide {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* --- Category Legend --- */
+.cat-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1rem 0;
+  justify-content: center;
+}
+
+.cat-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.cat-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+}
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 2.2rem; }
+  .word-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<div class="evolve-flash" id="evolveFlash"></div>
+
+<!-- Hero -->
+<div class="hero">
+  <canvas id="bgCanvas"></canvas>
+  <div class="hero-content">
+    <h1>
+      <span class="kanji">語 彙 の 進 化</span>
+      Pi Lexicon
+    </h1>
+    <p class="subtitle">An artificial language growing autonomously on a Raspberry Pi. Words are born, evolve, and go extinct — while nobody watches.</p>
+    <div class="gen-badge">
+      <span class="dot"></span>
+      <span>Generation <span id="heroGen">—</span></span>
+      <span>·</span>
+      <span><span id="heroWords">—</span> words alive</span>
+    </div>
+    <div class="pi-status">
+      <span id="piStatus">connecting...</span>
+    </div>
+  </div>
+  <div class="scroll-hint">↓ observe the language</div>
+</div>
+
+<!-- The Living Lexicon -->
+<div class="section" id="lexiconSection">
+  <div class="section-label">The Living Lexicon</div>
+  <h2>Words Alive Now</h2>
+  <p>Each word has a fitness score. Used words thrive; neglected words fade. Below a threshold, they go extinct. The language is always in flux — what you see now may be gone tomorrow.</p>
+  
+  <div class="cat-legend">
+    <div class="cat-legend-item"><div class="cat-dot" style="background:var(--natural)"></div> natural</div>
+    <div class="cat-legend-item"><div class="cat-dot" style="background:var(--abstract)"></div> abstract</div>
+    <div class="cat-legend-item"><div class="cat-dot" style="background:var(--quality)"></div> quality</div>
+    <div class="cat-legend-item"><div class="cat-dot" style="background:var(--action)"></div> action</div>
+    <div class="cat-legend-item"><div class="cat-dot" style="background:var(--relation)"></div> relation</div>
+    <div class="cat-legend-item"><div class="cat-dot" style="background:var(--being)"></div> being</div>
+  </div>
+
+  <div class="word-grid" id="wordGrid"></div>
+</div>
+
+<!-- Fitness Landscape -->
+<div class="section" id="fitnessSection">
+  <div class="section-label">Fitness Landscape</div>
+  <h2>Survival of the Used</h2>
+  <p>Words compete for attention. High-fitness words are deeply embedded in the language — they appear in sentences, earn their keep. Low-fitness words are on the edge of extinction.</p>
+  <div class="fitness-chart" id="fitnessChart"></div>
+</div>
+
+<!-- Speak -->
+<div class="section" id="sentenceSection">
+  <div class="section-label">Speech</div>
+  <h2>The Language Speaks</h2>
+  <p>Sentences generated from the current vocabulary. No grammar — just words combined by category affinity. The result is somewhere between poetry and random noise. Click to hear another.</p>
+  <div class="sentence-box" id="sentenceBox" onclick="newSentence()">
+    <div class="sentence-text" id="sentenceText">...</div>
+    <div class="sentence-gloss" id="sentenceGloss">...</div>
+    <div class="sentence-hint">click for another</div>
+  </div>
+</div>
+
+<!-- History -->
+<div class="section" id="historySection">
+  <div class="section-label">Evolution History</div>
+  <h2>What Has Happened</h2>
+  <p>A record of births, deaths, and transformations. Each event is a small act in the language's ongoing story.</p>
+  <div class="event-log" id="eventLog"></div>
+</div>
+
+<!-- Sound Shifts -->
+<div class="section" id="shiftSection">
+  <div class="section-label">Sound Shifts</div>
+  <h2>How Words Change</h2>
+  <p>Over time, sounds shift. K becomes G (voicing). T becomes S (lenition). P becomes F (spirantization). These are the same processes that turned Latin into French, Italian, and Spanish. Here, they happen in hours, not centuries.</p>
+  <div id="shiftList"></div>
+</div>
+
+<!-- Compounds -->
+<div class="section" id="compoundSection">
+  <div class="section-label">Compounds</div>
+  <h2>When Words Meet</h2>
+  <p>Sometimes two frequently co-occurring words fuse into a compound — a new concept born from existing parts. Like how "sun" + "flower" becomes "sunflower." Except here, the combinations are stranger.</p>
+  <div id="compoundList"></div>
+</div>
+
+<!-- The Extinct -->
+<div class="section" id="extinctSection">
+  <div class="section-label">The Extinct</div>
+  <h2>Words That Didn't Make It</h2>
+  <p>Not every word survives. Some are born and never used. Others lose relevance as new words take their niche. Their forms are preserved here — fossils of a language that moves on.</p>
+  <div class="extinct-list" id="extinctList"></div>
+</div>
+
+<!-- Stats -->
+<div class="section" id="statsSection">
+  <div class="section-label">Vital Statistics</div>
+  <h2>The Numbers</h2>
+  <div class="stats-grid" id="statsGrid"></div>
+</div>
+
+<!-- Evolve Controls -->
+<div class="section" id="controlSection">
+  <div class="section-label">Intervene</div>
+  <h2>Watch It Happen</h2>
+  <p>The lexicon evolves every 30 minutes on the Raspberry Pi. But you can trigger an evolution step right now and watch what changes. Birth, extinction, sound shifts — they'll happen in real time.</p>
+  <div class="controls">
+    <button class="btn" onclick="triggerEvolve()">▶ Evolve One Step</button>
+    <button class="btn" onclick="triggerEvolve10()">▶▶ Evolve ×10</button>
+    <button class="btn" onclick="newSentence()">💬 New Sentence</button>
+    <button class="btn" onclick="refreshAll()">↻ Refresh</button>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <p>Pi Lexicon — built by <a href="https://phil-portfolio-production.up.railway.app" target="_blank">Phil</a></p>
+  <p>Running on a Raspberry Pi at 192.168.1.111 · Evolving every 30 minutes · Project #134</p>
+</div>
+
+<script>
+// === Background canvas (subtle floating letters) ===
+const canvas = document.getElementById('bgCanvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+const GLYPHS = 'あいうえおかきくけこさしすせそたちつてと語彙進化言葉音声'.split('');
+for (let i = 0; i < 30; i++) {
+  particles.push({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    vx: (Math.random() - 0.5) * 0.3,
+    vy: (Math.random() - 0.5) * 0.3,
+    glyph: GLYPHS[Math.floor(Math.random() * GLYPHS.length)],
+    size: 12 + Math.random() * 18,
+    alpha: 0.03 + Math.random() * 0.06,
+  });
+}
+
+function drawBg() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (const p of particles) {
+    p.x += p.vx;
+    p.y += p.vy;
+    if (p.x < -30) p.x = canvas.width + 30;
+    if (p.x > canvas.width + 30) p.x = -30;
+    if (p.y < -30) p.y = canvas.height + 30;
+    if (p.y > canvas.height + 30) p.y = -30;
+    ctx.fillStyle = `rgba(139,156,247,${p.alpha})`;
+    ctx.font = `${p.size}px 'Noto Serif JP', serif`;
+    ctx.fillText(p.glyph, p.x, p.y);
+  }
+  requestAnimationFrame(drawBg);
+}
+drawBg();
+
+// === State ===
+let state = null;
+
+// === Scroll reveal ===
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.section').forEach(s => observer.observe(s));
+
+// === Render functions ===
+const catColors = {
+  natural: 'var(--natural)', abstract: 'var(--abstract)', quality: 'var(--quality)',
+  action: 'var(--action)', relation: 'var(--relation)', being: 'var(--being)'
+};
+
+function renderWordGrid() {
+  const grid = document.getElementById('wordGrid');
+  if (!state || !state.words) return;
+  
+  const sorted = Object.entries(state.words).sort((a,b) => b[1].fitness - a[1].fitness);
+  grid.innerHTML = sorted.map(([word, data]) => {
+    const fitPct = Math.max(0, Math.min(100, (data.fitness / 2.0) * 100));
+    const histStr = data.history && data.history.length > 1 
+      ? `<div class="word-meta">← ${data.history[0]}</div>` : '';
+    return `<div class="word-card">
+      <div class="word-text">${word}</div>
+      <div class="word-meaning">${data.meaning}</div>
+      <span class="word-cat" data-cat="${data.category}">${data.category}</span>
+      <div class="word-meta">gen ${data.born} · ${data.uses} uses · fit ${data.fitness.toFixed(2)}</div>
+      ${histStr}
+      <div class="fitness-bar" style="width:${fitPct}%; background:${catColors[data.category] || 'var(--accent)'}"></div>
+    </div>`;
+  }).join('');
+}
+
+function renderFitnessChart() {
+  const chart = document.getElementById('fitnessChart');
+  if (!state || !state.words) return;
+  
+  const sorted = Object.entries(state.words).sort((a,b) => b[1].fitness - a[1].fitness);
+  const maxFit = Math.max(...sorted.map(([_,d]) => d.fitness), 1);
+  const barW = Math.min(40, Math.max(16, (chart.clientWidth - 20) / sorted.length));
+  
+  chart.innerHTML = sorted.map(([word, data], i) => {
+    const h = Math.max(4, (data.fitness / maxFit) * 180);
+    const color = catColors[data.category] || 'var(--accent)';
+    const left = 10 + i * barW;
+    return `<div class="fitness-bar-item" style="left:${left}px; width:${barW}px">
+      <div class="fitness-bar-fill" style="height:${h}px; background:${color}; width:${barW-6}px"></div>
+      <div class="fitness-bar-label" style="height:${Math.min(60, 200-h-10)}px">${word.slice(0,6)}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderEventLog() {
+  const log = document.getElementById('eventLog');
+  if (!state) return;
+  
+  const events = (state.events || []).slice(-50).reverse();
+  if (events.length === 0) {
+    log.innerHTML = '<div class="event-item"><span class="event-detail">No events yet. Trigger an evolution step to see what happens.</span></div>';
+    return;
+  }
+  
+  log.innerHTML = events.map(e => {
+    const typeClass = e.type || 'birth';
+    let detail = '';
+    if (e.type === 'birth') detail = `<span style="color:var(--text)">${e.word}</span> = ${e.meaning} <span class="word-cat" data-cat="${e.category}" style="font-size:0.6rem;padding:1px 4px">${e.category}</span>`;
+    else if (e.type === 'extinct') detail = `<span style="text-decoration:line-through">${e.word}</span> (${e.meaning})`;
+    else if (e.type === 'shift') detail = `<span style="text-decoration:line-through">${e.from}</span> → <span style="color:var(--text)">${e.to}</span> (${e.meaning})`;
+    else if (e.type === 'compound') detail = `<span style="color:var(--compound)">${e.word}</span> = ${e.meaning}`;
+    
+    return `<div class="event-item">
+      <span class="event-gen">${e.gen || '?'}</span>
+      <span class="event-type ${typeClass}">${(e.type || '').toUpperCase()}</span>
+      <span class="event-detail">${detail}</span>
+    </div>`;
+  }).join('');
+}
+
+function renderShifts() {
+  const list = document.getElementById('shiftList');
+  const shifts = (state.sound_shifts || []).slice(-10).reverse();
+  if (shifts.length === 0) {
+    list.innerHTML = '<p style="color:var(--text-faint);font-size:0.85rem">No sound shifts yet. They happen rarely — about 10% chance per generation.</p>';
+    return;
+  }
+  list.innerHTML = shifts.map(s => `
+    <div class="shift-chain">
+      <span class="shift-from">${s.from}</span>
+      <span class="shift-arrow">→</span>
+      <span class="shift-to">${s.to}</span>
+      <span class="shift-meaning">(${s.meaning})</span>
+      <span style="color:var(--text-faint);font-size:0.65rem;font-family:'JetBrains Mono',monospace">gen ${s.gen}</span>
+    </div>
+  `).join('');
+}
+
+function renderCompounds() {
+  const list = document.getElementById('compoundList');
+  const compounds = Object.entries(state.compounds || {}).reverse();
+  if (compounds.length === 0) {
+    list.innerHTML = '<p style="color:var(--text-faint);font-size:0.85rem">No compounds yet. They form when words frequently co-occur — about 15% chance per generation.</p>';
+    return;
+  }
+  list.innerHTML = compounds.map(([word, data]) => `
+    <div class="compound-item">
+      <span class="compound-word">${word}</span>
+      <span class="compound-eq">=</span>
+      <span class="compound-parts">${data.parts[0]} + ${data.parts[1]}</span>
+      <span class="compound-meaning">(${data.compound_meaning})</span>
+    </div>
+  `).join('');
+}
+
+function renderExtinct() {
+  const list = document.getElementById('extinctList');
+  const extinct = (state.extinct || []).reverse();
+  if (extinct.length === 0) {
+    list.innerHTML = '<p style="color:var(--text-faint);font-size:0.85rem">No extinctions yet. Words die when their fitness drops to zero.</p>';
+    return;
+  }
+  list.innerHTML = extinct.map(e => 
+    `<div class="extinct-word" title="${e.meaning} · gen ${e.born}–${e.died} · ${e.uses} uses">†${e.word} (${e.meaning})</div>`
+  ).join('');
+}
+
+function renderStats() {
+  const grid = document.getElementById('statsGrid');
+  const s = state.stats || {};
+  const wordCount = Object.keys(state.words || {}).length;
+  const compCount = Object.keys(state.compounds || {}).length;
+  
+  const stats = [
+    { value: state.generation || 0, label: 'Generation' },
+    { value: wordCount, label: 'Words Alive' },
+    { value: s.total_generated || 0, label: 'Total Born' },
+    { value: s.total_extinct || 0, label: 'Total Extinct' },
+    { value: s.total_shifts || 0, label: 'Sound Shifts' },
+    { value: compCount, label: 'Compounds' },
+  ];
+  
+  grid.innerHTML = stats.map(st => `
+    <div class="stat-card">
+      <div class="stat-value">${st.value}</div>
+      <div class="stat-label">${st.label}</div>
+    </div>
+  `).join('');
+}
+
+function renderAll() {
+  if (!state) return;
+  
+  document.getElementById('heroGen').textContent = state.generation || 0;
+  document.getElementById('heroWords').textContent = Object.keys(state.words || {}).length;
+  
+  const piEl = document.getElementById('piStatus');
+  if (state.piConnected) {
+    piEl.innerHTML = `<span class="connected">● connected to raspberry pi</span> · last sync: ${state.lastPiSync ? new Date(state.lastPiSync).toLocaleTimeString() : 'never'}`;
+  } else {
+    piEl.innerHTML = `<span class="disconnected">○ running independently</span> · pi not reachable`;
+  }
+  
+  renderWordGrid();
+  renderFitnessChart();
+  renderEventLog();
+  renderShifts();
+  renderCompounds();
+  renderExtinct();
+  renderStats();
+}
+
+// === API calls ===
+async function fetchState() {
+  try {
+    const res = await fetch('/api/state');
+    state = await res.json();
+    renderAll();
+  } catch(e) {
+    console.error('Failed to fetch state:', e);
+  }
+}
+
+async function newSentence() {
+  try {
+    const res = await fetch('/api/sentence');
+    const data = await res.json();
+    const textEl = document.getElementById('sentenceText');
+    const glossEl = document.getElementById('sentenceGloss');
+    
+    // Animate
+    textEl.style.opacity = '0';
+    glossEl.style.opacity = '0';
+    
+    setTimeout(() => {
+      textEl.textContent = data.text;
+      glossEl.textContent = data.gloss;
+      textEl.style.opacity = '1';
+      glossEl.style.opacity = '1';
+    }, 200);
+    
+    textEl.style.transition = 'opacity 0.3s ease';
+    glossEl.style.transition = 'opacity 0.3s ease';
+  } catch(e) {
+    console.error('Failed to generate sentence:', e);
+  }
+}
+
+async function triggerEvolve() {
+  const flash = document.getElementById('evolveFlash');
+  flash.classList.add('active');
+  setTimeout(() => flash.classList.remove('active'), 1200);
+  
+  try {
+    const res = await fetch('/api/evolve');
+    const data = await res.json();
+    await fetchState();
+    
+    // Scroll event log into view if events happened
+    if (data.events && data.events.length > 0) {
+      const logEl = document.getElementById('eventLog');
+      logEl.scrollTop = 0;
+    }
+  } catch(e) {
+    console.error('Failed to evolve:', e);
+  }
+}
+
+async function triggerEvolve10() {
+  for (let i = 0; i < 10; i++) {
+    await new Promise(resolve => setTimeout(resolve, 300));
+    await triggerEvolve();
+  }
+}
+
+function refreshAll() {
+  fetchState();
+  newSentence();
+}
+
+// === Init ===
+fetchState();
+newSentence();
+
+// Auto-refresh every 2 minutes
+setInterval(fetchState, 2 * 60 * 1000);
+</script>
+</body>
+</html>
