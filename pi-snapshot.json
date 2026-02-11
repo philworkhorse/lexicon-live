@@ -4,38 +4,18 @@
       "meaning": "ocean",
       "category": "natural",
       "born": 2972,
-      "uses": 16,
-      "fitness": 0.05000000000000046,
+      "uses": 23,
+      "fitness": 0.2500000000000005,
       "history": [
         "pan"
-      ]
-    },
-    "wiu": {
-      "meaning": "soft",
-      "category": "quality",
-      "born": 2973,
-      "uses": 17,
-      "fitness": 4.579669976578771e-16,
-      "history": [
-        "wiu"
-      ]
-    },
-    "maza": {
-      "meaning": "self",
-      "category": "being",
-      "born": 2977,
-      "uses": 21,
-      "fitness": 0.2,
-      "history": [
-        "maza"
       ]
     },
     "ti": {
       "meaning": "old",
       "category": "quality",
       "born": 2981,
-      "uses": 18,
-      "fitness": 0.20000000000000007,
+      "uses": 23,
+      "fitness": 1.249000902703301e-16,
       "history": [
         "ti"
       ]
@@ -44,128 +24,58 @@
       "meaning": "star",
       "category": "natural",
       "born": 2982,
-      "uses": 15,
-      "fitness": 0.2500000000000001,
+      "uses": 20,
+      "fitness": 0.15000000000000013,
       "history": [
         "e"
-      ]
-    },
-    "miwan": {
-      "meaning": "high",
-      "category": "quality",
-      "born": 2985,
-      "uses": 10,
-      "fitness": 0.1000000000000003,
-      "history": [
-        "miwan"
       ]
     },
     "nalo": {
       "meaning": "river",
       "category": "natural",
       "born": 2986,
-      "uses": 12,
-      "fitness": 0.349999999999999,
+      "uses": 17,
+      "fitness": 0.14999999999999902,
       "history": [
         "nalo"
-      ]
-    },
-    "monhen": {
-      "meaning": "mountain",
-      "category": "natural",
-      "born": 2989,
-      "uses": 10,
-      "fitness": 0.19999999999999946,
-      "history": [
-        "monhen"
-      ]
-    },
-    "sarum": {
-      "meaning": "begin",
-      "category": "action",
-      "born": 2993,
-      "uses": 13,
-      "fitness": 0.40000000000000024,
-      "history": [
-        "sarum"
-      ]
-    },
-    "numeto": {
-      "meaning": "many",
-      "category": "being",
-      "born": 2995,
-      "uses": 9,
-      "fitness": 0.10000000000000013,
-      "history": [
-        "numeto"
       ]
     },
     "kuzinum": {
       "meaning": "wave",
       "category": "abstract",
       "born": 2996,
-      "uses": 11,
-      "fitness": 0.649999999999999,
+      "uses": 15,
+      "fitness": 0.5499999999999985,
       "history": [
         "kuzinum"
-      ]
-    },
-    "ara": {
-      "meaning": "between",
-      "category": "relation",
-      "born": 2997,
-      "uses": 6,
-      "fitness": 0.20000000000000012,
-      "history": [
-        "ara"
       ]
     },
     "kam": {
       "meaning": "sun",
       "category": "natural",
       "born": 2999,
-      "uses": 8,
-      "fitness": 0.4999999999999995,
+      "uses": 15,
+      "fitness": 0.39999999999999936,
       "history": [
         "kam"
-      ]
-    },
-    "ranili": {
-      "meaning": "make",
-      "category": "action",
-      "born": 3000,
-      "uses": 3,
-      "fitness": 0.05000000000000013,
-      "history": [
-        "ranili"
       ]
     },
     "mie": {
       "meaning": "cloud",
       "category": "natural",
       "born": 3001,
-      "uses": 5,
-      "fitness": 0.3,
+      "uses": 8,
+      "fitness": 0.10000000000000007,
       "history": [
         "mie"
-      ]
-    },
-    "rakim": {
-      "meaning": "seed",
-      "category": "natural",
-      "born": 3003,
-      "uses": 2,
-      "fitness": 0.10000000000000013,
-      "history": [
-        "rakim"
       ]
     },
     "kukene": {
       "meaning": "fire",
       "category": "natural",
       "born": 3004,
-      "uses": 3,
-      "fitness": 0.34999999999999976,
+      "uses": 10,
+      "fitness": 0.34999999999999987,
       "history": [
         "kukene"
       ]
@@ -174,8 +84,8 @@
       "meaning": "warm",
       "category": "quality",
       "born": 3005,
-      "uses": 2,
-      "fitness": 0.3,
+      "uses": 7,
+      "fitness": 0.10000000000000019,
       "history": [
         "kokono"
       ]
@@ -184,8 +94,8 @@
       "meaning": "hold",
       "category": "action",
       "born": 3007,
-      "uses": 4,
-      "fitness": 0.5999999999999996,
+      "uses": 13,
+      "fitness": 0.4999999999999995,
       "history": [
         "kinhommi"
       ]
@@ -194,8 +104,8 @@
       "meaning": "stone",
       "category": "natural",
       "born": 3010,
-      "uses": 1,
-      "fitness": 0.44999999999999996,
+      "uses": 7,
+      "fitness": 0.45,
       "history": [
         "me"
       ]
@@ -204,8 +114,8 @@
       "meaning": "join",
       "category": "action",
       "born": 3011,
-      "uses": 1,
-      "fitness": 0.49999999999999994,
+      "uses": 6,
+      "fitness": 0.4000000000000001,
       "history": [
         "pazeta"
       ]
@@ -214,8 +124,8 @@
       "meaning": "order",
       "category": "abstract",
       "born": 3012,
-      "uses": 1,
-      "fitness": 0.5499999999999999,
+      "uses": 5,
+      "fitness": 0.45,
       "history": [
         "oena"
       ]
@@ -224,10 +134,81 @@
       "meaning": "deep",
       "category": "quality",
       "born": 3013,
-      "uses": 1,
-      "fitness": 0.6,
+      "uses": 7,
+      "fitness": 0.1999999999999999,
       "history": [
         "loka"
+      ]
+    },
+    "numeso": {
+      "meaning": "many",
+      "category": "being",
+      "born": 2995,
+      "uses": 16,
+      "fitness": 1.249000902703301e-16,
+      "history": [
+        "numeto",
+        "numeso"
+      ]
+    },
+    "naru": {
+      "meaning": "pattern",
+      "category": "abstract",
+      "born": 3017,
+      "uses": 2,
+      "fitness": 0.3,
+      "history": [
+        "naru"
+      ]
+    },
+    "sapa": {
+      "meaning": "rise",
+      "category": "action",
+      "born": 3018,
+      "uses": 4,
+      "fitness": 0.45,
+      "history": [
+        "sapa"
+      ]
+    },
+    "rakiki": {
+      "meaning": "between",
+      "category": "relation",
+      "born": 3019,
+      "uses": 3,
+      "fitness": 0.5999999999999998,
+      "history": [
+        "rakiki"
+      ]
+    },
+    "meneu": {
+      "meaning": "within",
+      "category": "relation",
+      "born": 3020,
+      "uses": 2,
+      "fitness": 0.45,
+      "history": [
+        "meneu"
+      ]
+    },
+    "na": {
+      "meaning": "cold",
+      "category": "quality",
+      "born": 3022,
+      "uses": 0,
+      "fitness": 0.45,
+      "history": [
+        "na"
+      ]
+    },
+    "saku": {
+      "meaning": "all",
+      "category": "being",
+      "born": 3023,
+      "uses": 4,
+      "fitness": 0.6,
+      "history": [
+        "saku"
       ]
     }
   },
@@ -5751,18 +5732,24 @@
       ],
       "compound_meaning": "warm-many",
       "born": 3010
+    },
+    "meeso": {
+      "parts": [
+        "me",
+        "numeso"
+      ],
+      "meanings": [
+        "stone",
+        "many"
+      ],
+      "compound_meaning": "stone-many",
+      "born": 3022
     }
   },
-  "generation": 3013,
+  "generation": 3023,
   "created": "2026-02-10T20:11:47.796968",
-  "last_evolved": "2026-02-11T01:53:37.301523",
+  "last_evolved": "2026-02-11T04:12:01.229708",
   "sound_shifts": [
-    {
-      "gen": 971,
-      "from": "mesu",
-      "to": "meshu",
-      "meaning": "self"
-    },
     {
       "gen": 1067,
       "from": "ane",
@@ -5936,72 +5923,15 @@
       "from": "rosimi",
       "to": "rozimi",
       "meaning": "river"
+    },
+    {
+      "gen": 3015,
+      "from": "numeto",
+      "to": "numeso",
+      "meaning": "many"
     }
   ],
   "extinct": [
-    {
-      "word": "aruli",
-      "meaning": "near",
-      "born": 2919,
-      "died": 2945,
-      "uses": 8
-    },
-    {
-      "word": "ean",
-      "meaning": "with",
-      "born": 2922,
-      "died": 2945,
-      "uses": 6
-    },
-    {
-      "word": "wapomhe",
-      "meaning": "warm",
-      "born": 2865,
-      "died": 2946,
-      "uses": 35
-    },
-    {
-      "word": "konka",
-      "meaning": "fall",
-      "born": 2918,
-      "died": 2949,
-      "uses": 10
-    },
-    {
-      "word": "limli",
-      "meaning": "grow",
-      "born": 2932,
-      "died": 2949,
-      "uses": 3
-    },
-    {
-      "word": "sora",
-      "meaning": "one",
-      "born": 2916,
-      "died": 2950,
-      "uses": 12
-    },
-    {
-      "word": "ki",
-      "meaning": "end",
-      "born": 2930,
-      "died": 2950,
-      "uses": 5
-    },
-    {
-      "word": "ku",
-      "meaning": "high",
-      "born": 2933,
-      "died": 2950,
-      "uses": 3
-    },
-    {
-      "word": "tunvem",
-      "meaning": "deep",
-      "born": 2920,
-      "died": 2951,
-      "uses": 10
-    },
     {
       "word": "sono",
       "meaning": "connection",
@@ -6288,12 +6218,75 @@
       "born": 2983,
       "died": 3010,
       "uses": 11
+    },
+    {
+      "word": "ranili",
+      "meaning": "make",
+      "born": 3000,
+      "died": 3015,
+      "uses": 3
+    },
+    {
+      "word": "miwan",
+      "meaning": "high",
+      "born": 2985,
+      "died": 3016,
+      "uses": 10
+    },
+    {
+      "word": "monhen",
+      "meaning": "mountain",
+      "born": 2989,
+      "died": 3017,
+      "uses": 10
+    },
+    {
+      "word": "wiu",
+      "meaning": "soft",
+      "born": 2973,
+      "died": 3018,
+      "uses": 19
+    },
+    {
+      "word": "maza",
+      "meaning": "self",
+      "born": 2977,
+      "died": 3018,
+      "uses": 21
+    },
+    {
+      "word": "ara",
+      "meaning": "between",
+      "born": 2997,
+      "died": 3018,
+      "uses": 6
+    },
+    {
+      "word": "rakim",
+      "meaning": "seed",
+      "born": 3003,
+      "died": 3018,
+      "uses": 3
+    },
+    {
+      "word": "kama",
+      "meaning": "slow",
+      "born": 3014,
+      "died": 3019,
+      "uses": 0
+    },
+    {
+      "word": "sarum",
+      "meaning": "begin",
+      "born": 2993,
+      "died": 3022,
+      "uses": 13
     }
   ],
   "stats": {
-    "total_generated": 2098,
-    "total_extinct": 2075,
-    "total_compounds": 460,
-    "total_shifts": 40
+    "total_generated": 2105,
+    "total_extinct": 2084,
+    "total_compounds": 461,
+    "total_shifts": 41
   }
 }
