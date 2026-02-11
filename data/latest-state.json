@@ -4,8 +4,8 @@
       "meaning": "balance",
       "category": "abstract",
       "born": 3036,
-      "uses": 15,
-      "fitness": 0.15000000000000036,
+      "uses": 16,
+      "fitness": 0.20000000000000034,
       "history": [
         "luan"
       ]
@@ -14,8 +14,8 @@
       "meaning": "hold",
       "category": "action",
       "born": 3044,
-      "uses": 15,
-      "fitness": 0.24999999999999933,
+      "uses": 17,
+      "fitness": 0.2999999999999993,
       "history": [
         "haha"
       ]
@@ -24,8 +24,8 @@
       "meaning": "new",
       "category": "quality",
       "born": 3046,
-      "uses": 12,
-      "fitness": 0.1500000000000003,
+      "uses": 14,
+      "fitness": 0.20000000000000034,
       "history": [
         "una"
       ]
@@ -35,7 +35,7 @@
       "category": "quality",
       "born": 3048,
       "uses": 14,
-      "fitness": 0.35000000000000026,
+      "fitness": 0.30000000000000027,
       "history": [
         "sasi"
       ]
@@ -44,8 +44,8 @@
       "meaning": "earth",
       "category": "natural",
       "born": 3052,
-      "uses": 11,
-      "fitness": 0.1499999999999999,
+      "uses": 12,
+      "fitness": 0.09999999999999991,
       "history": [
         "wimkene"
       ]
@@ -54,8 +54,8 @@
       "meaning": "star",
       "category": "natural",
       "born": 3053,
-      "uses": 10,
-      "fitness": 0.40000000000000013,
+      "uses": 11,
+      "fitness": 0.4500000000000001,
       "history": [
         "wa"
       ]
@@ -64,8 +64,8 @@
       "meaning": "give",
       "category": "action",
       "born": 3054,
-      "uses": 7,
-      "fitness": 0.1500000000000003,
+      "uses": 8,
+      "fitness": 0.1000000000000003,
       "history": [
         "uzama"
       ]
@@ -75,7 +75,7 @@
       "category": "natural",
       "born": 3056,
       "uses": 7,
-      "fitness": 0.2500000000000002,
+      "fitness": 0.20000000000000023,
       "history": [
         "mamvotam"
       ]
@@ -85,7 +85,7 @@
       "category": "action",
       "born": 3058,
       "uses": 6,
-      "fitness": 0.2500000000000002,
+      "fitness": 0.20000000000000023,
       "history": [
         "sonnure"
       ]
@@ -94,8 +94,8 @@
       "meaning": "self",
       "category": "being",
       "born": 3060,
-      "uses": 11,
-      "fitness": 0.5499999999999994,
+      "uses": 13,
+      "fitness": 0.5999999999999993,
       "history": [
         "sati"
       ]
@@ -105,20 +105,9 @@
       "category": "natural",
       "born": 3063,
       "uses": 3,
-      "fitness": 0.29999999999999993,
+      "fitness": 0.24999999999999994,
       "history": [
         "suna"
-      ]
-    },
-    "lohim": {
-      "meaning": "far",
-      "category": "quality",
-      "born": 3043,
-      "uses": 10,
-      "fitness": 1.8041124150158794e-16,
-      "history": [
-        "lokim",
-        "lohim"
       ]
     },
     "nisa": {
@@ -126,7 +115,7 @@
       "category": "natural",
       "born": 3064,
       "uses": 5,
-      "fitness": 0.5499999999999999,
+      "fitness": 0.49999999999999994,
       "history": [
         "nisa"
       ]
@@ -136,7 +125,7 @@
       "category": "natural",
       "born": 3068,
       "uses": 2,
-      "fitness": 0.44999999999999984,
+      "fitness": 0.39999999999999986,
       "history": [
         "ma"
       ]
@@ -145,8 +134,8 @@
       "meaning": "fast",
       "category": "quality",
       "born": 3069,
-      "uses": 3,
-      "fitness": 0.5999999999999998,
+      "uses": 5,
+      "fitness": 0.6499999999999997,
       "history": [
         "sewen"
       ]
@@ -156,7 +145,7 @@
       "category": "natural",
       "born": 3071,
       "uses": 0,
-      "fitness": 0.4,
+      "fitness": 0.35000000000000003,
       "history": [
         "wizin"
       ]
@@ -166,7 +155,7 @@
       "category": "natural",
       "born": 3072,
       "uses": 0,
-      "fitness": 0.45,
+      "fitness": 0.4,
       "history": [
         "sim"
       ]
@@ -176,7 +165,7 @@
       "category": "abstract",
       "born": 3073,
       "uses": 0,
-      "fitness": 0.5,
+      "fitness": 0.45,
       "history": [
         "ke"
       ]
@@ -5812,9 +5801,9 @@
       "born": 3070
     }
   },
-  "generation": 3073,
+  "generation": 3074,
   "created": "2026-02-10T20:11:47.796968",
-  "last_evolved": "2026-02-11T08:42:02.582125",
+  "last_evolved": "2026-02-11T09:12:02.757570",
   "sound_shifts": [
     {
       "gen": 1090,
@@ -5998,13 +5987,6 @@
     }
   ],
   "extinct": [
-    {
-      "word": "tuma",
-      "meaning": "bright",
-      "born": 2969,
-      "died": 3004,
-      "uses": 15
-    },
     {
       "word": "me",
       "meaning": "sky",
@@ -6347,11 +6329,18 @@
       "born": 3041,
       "died": 3073,
       "uses": 12
+    },
+    {
+      "word": "lohim",
+      "meaning": "far",
+      "born": 3043,
+      "died": 3074,
+      "uses": 10
     }
   ],
   "stats": {
     "total_generated": 2140,
-    "total_extinct": 2122,
+    "total_extinct": 2123,
     "total_compounds": 469,
     "total_shifts": 42
   }
